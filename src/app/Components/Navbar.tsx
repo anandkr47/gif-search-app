@@ -31,9 +31,9 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, loading }) => {
           type="text"
           value={query}
           onChange={handleInputChange}
-          placeholder="Search for GIFs"
-          className="w-full p-2 border rounded-full outline-2 border-black shadow-lg "
-          style={{ color: 'black', outline: 'none', width: '70%',backgroundColor:'#f6f3f4' }}
+          placeholder="🔍Search for GIFs"
+          className="w-full p-2 border-2 rounded-full outline-2 border-black shadow-lg "
+          style={{ color: 'black', width: '70%',backgroundColor:'#f6f3f4' }}
         />
         <button
           onClick={handleSearch}
