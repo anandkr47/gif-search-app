@@ -50,8 +50,8 @@ export default function Signup() {
         <div className="w-18 p-5">
           <div className="py-10">
             <div className="flex flex-col items-center">
-              <h2 className="text-3xl font-bold text-green-500 mb-2">Sign In to Account</h2>
-              <div className="border-2 w-10 border-green-500 inline-block mb-2"></div>
+              <h2 className="text-3xl font-bold text-black mb-2">Sign In to Account</h2>
+              <div className="border-2 w-10 border-black inline-block mb-2"></div>
             </div>
 
             <form onSubmit={handleSignUp}>
@@ -96,7 +96,7 @@ export default function Signup() {
 
                 <button
                   type="submit"
-                  className="border-2 text-black border-green-500 rounded-full px-12 py-2 inline-block font-semibold hover:bg-green-500 hover:text-white mt-3"
+                  className="border-2 text-black border-black rounded-full px-12 py-2 inline-block font-semibold hover:bg-green-500 hover:text-white mt-3"
                 >
                   Sign In
                 </button>
