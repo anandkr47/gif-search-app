@@ -38,12 +38,12 @@ const Dropdown = () => {
     <div className="dropdown">
       {user && (
         <div className="profile bg-black p-2 rounded-full" onClick={toggleDropdown}>
-          <span>👤 Profile</span>
+          <span className="text-white">👤 Profile</span>
         </div>
       )}
       {isOpen && user && (
         <div className="dropdown-content">
-          <Link href="/favorite">❤️ Favorites</Link>
+          <Link href="/favorite">⭐Favorites</Link>
           <a onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</a>
         </div>
       )}

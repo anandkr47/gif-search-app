@@ -72,8 +72,8 @@ const Favorites: React.FC = () => {
     <div className="container mx-auto p-4">
       <ToastContainer />
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold  text-black">Favorites ❤️</h1>
-        <Link href="/search" className='p-4 rounded-full shadow-lg bg-black'>Home</Link>
+        <h1 className="text-2xl font-bold  text-black">Favorites⭐</h1>
+        <Link href="/search" className='p-4 rounded-full shadow-lg bg-black text-white'>Home</Link>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -88,7 +88,7 @@ const Favorites: React.FC = () => {
               onClick={() => handleRemoveFavorite(favorite.id)}
               className="absolute top-2 right-2 px-2 py-1 text-black rounded-full bg-white"
             >
-              ❌Remove
+              ❌
             </button>
             <p className="text-black p-2">{favorite.gifTitle}</p>
             <p className="text-black p-2">@{favorite.gifUsername}</p>
