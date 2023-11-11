@@ -2,8 +2,11 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Navbar from './Navbar';
 
+import { auth, addDoc, collection, db } from '../../firebase'; // Update the path accordingly
 
 interface Gif {
   id: string;
@@ -23,22 +26,49 @@ const GifSearch: React.FC = () => {
   const apiKey = '9Ixlv3DWC1biJRI57RanyL7RTbfzz0o7';
   const handleFavorite = async (gif: Gif) => {
     try {
-      // Implement logic to store the favorite GIF in Firebase
-      // You can use the Firebase Realtime Database or Firestore for this
-      // For example, if using Firestore:
-      // const user = getCurrentUser(); // Implement getCurrentUser() based on your authentication logic
-      // await addFavoriteToFirestore(user.uid, gif);
-  
-      console.log('GIF favorited:', gif);
+      // Get the currently logged-in user
+      const user = auth.currentUser;
+
+      if (user) {
+        // Define the data to be stored in Firestore
+        const favoriteData = {
+          userId: user.uid,
+          gifId: gif.id,
+          gifUrl: gif.images.fixed_height.url,
+          timestamp: new Date(),
+        };
+
+        // Add the favorite to the 'favorites' collection in Firestore
+        const docRef = await addDoc(collection(db, 'favorites'), favoriteData);
+        console.log('Favorite GIF stored with ID:', docRef.id);
+
+        // Show success notification
+        toast.success('GIF favorited successfully!', {
+          position: 'top-right',
+          autoClose: 3000, // Close the notification after 3000 milliseconds (3 seconds)
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      } else {
+        console.warn('User not logged in. Unable to favorite GIF.');
+      }
     } catch (error) {
       console.error('Error favoriting GIF:', error);
+      // Show error notification
+      toast.error('Error favoriting GIF. Please try again.', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
-  
 
   useEffect(() => {
-    
-    
     const fetchGifs = async () => {
       try {
         setLoading(true);
@@ -68,12 +98,13 @@ const GifSearch: React.FC = () => {
 
       <div className="relative h-screen">
         <div className="flex flex-col items-center h-full p-4 bg-white">
+          <ToastContainer />
           {loading && (
             <img
-            src="/images/loader.gif" // Replace with the path to your loading GIF
-            alt="Loading"
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-          />
+              src="/images/loader.gif" // Replace with the path to your loading GIF
+              alt="Loading"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+            />
           )}
           <div className="flex flex-wrap mt-4 ">
             {gifs.map((gif) => (
