@@ -21,8 +21,24 @@ const GifSearch: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const apiKey = '9Ixlv3DWC1biJRI57RanyL7RTbfzz0o7';
+  const handleFavorite = async (gif: Gif) => {
+    try {
+      // Implement logic to store the favorite GIF in Firebase
+      // You can use the Firebase Realtime Database or Firestore for this
+      // For example, if using Firestore:
+      // const user = getCurrentUser(); // Implement getCurrentUser() based on your authentication logic
+      // await addFavoriteToFirestore(user.uid, gif);
+  
+      console.log('GIF favorited:', gif);
+    } catch (error) {
+      console.error('Error favoriting GIF:', error);
+    }
+  };
+  
 
   useEffect(() => {
+    
+    
     const fetchGifs = async () => {
       try {
         setLoading(true);
@@ -61,12 +77,13 @@ const GifSearch: React.FC = () => {
           )}
           <div className="flex flex-wrap mt-4 ">
             {gifs.map((gif) => (
-              <div key={gif.id} className="m-2">
+              <div key={gif.id} className="m-2 rounded shadow-lg">
                 <img
                   src={gif.images.fixed_height.url}
                   alt={gif.title}
                   style={{ maxWidth: '350px', maxHeight: '350px' }}
                 />
+                <button onClick={() => handleFavorite(gif)} className='p-2'>❤️</button>
               </div>
             ))}
           </div>

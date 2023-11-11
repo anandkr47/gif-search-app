@@ -44,7 +44,7 @@ const Dropdown = () => {
       {isOpen && user && (
         <div className="dropdown-content">
           <Link href="/favorites">❤️ Favorites</Link>
-          <a onClick={handleLogout}>Logout</a>
+          <a onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</a>
         </div>
       )}
     </div>
